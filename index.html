@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeQuest - Игровой тренажёр кода</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .container {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .level-card {
+            background: rgba(255,255,255,0.2);
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .level-card:hover {
+            transform: translateX(10px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎮 CodeQuest</h1>
+        <p>Игровой тренажёр для изучения HTML, CSS и JavaScript!</p>
+        
+        <div class="level-card" onclick="startLevel('html')">
+            <h3>🏝️ HTML-Остров</h3>
+            <p>Изучи основы HTML, строя структуру страницы</p>
+        </div>
+        
+        <div class="level-card" onclick="startLevel('css')">
+            <h3>🏙️ CSS-Город</h3>
+            <p>Научись стилизовать элементы с помощью CSS</p>
+        </div>
+        
+        <div class="level-card" onclick="startLevel('js')">
+            <h3>🌲 JavaScript-Лес</h3>
+            <p>Освой программирование с JavaScript</p>
+        </div>
+    </div>
+
+    <script>
+        function startLevel(level) {
+            alert('Уровень "' + level + '" скоро будет доступен! Следи за обновлениями!');
+        }
+    </script>
+</body>
+</html>
