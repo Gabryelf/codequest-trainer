@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Остров - CodeQuest</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            height: 80vh;
+        }
+        .toolbox {
+            background: rgba(255,255,255,0.9);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+        .preview {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            overflow: auto;
+        }
+        .tag {
+            background: #667eea;
+            color: white;
+            padding: 10px 15px;
+            margin: 5px;
+            border-radius: 8px;
+            cursor: grab;
+            display: inline-block;
+            user-select: none;
+        }
+        .tag:hover {
+            background: #5a6fd8;
+            transform: translateY(-2px);
+        }
+        .drop-zone {
+            border: 2px dashed #667eea;
+            border-radius: 10px;
+            padding: 20px;
+            min-height: 200px;
+            background: rgba(102, 126, 234, 0.1);
+        }
+        h1, h2 {
+            color: #2d3748;
+            margin-bottom: 15px;
+        }
+        .task {
+            background: #e2e8f0;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🏝️ HTML Остров</h1>
+    <p>Перетащи теги чтобы построить свою первую веб-страницу!</p>
+    
+    <div class="container">
+        <!-- Левая колонка - инструменты -->
+        <div class="toolbox">
+            <h2>📦 Доступные теги:</h2>
+            <div class="tags-container">
+                <div class="tag" draggable="true" data-tag="<h1>Заголовок</h1>">h1</div>
+                <div class="tag" draggable="true" data-tag="<p>Абзац текста</p>">p</div>
+                <div class="tag" draggable="true" data-tag="<button>Кнопка</button>">button</div>
+                <div class="tag" draggable="true" data-tag="<div>Блок</div>">div</div>
+                <div class="tag" draggable="true" data-tag="<span>Текст</span>">span</div>
+            </div>
+            
+            <div class="task">
+                <h3>🎯 Задание:</h3>
+                <p>Создай страницу с заголовком и двумя абзацами текста!</p>
+            </div>
+        </div>
+        
+        <!-- Правая колонка - превью -->
+        <div class="preview">
+            <h2>👀 Результат:</h2>
+            <div class="drop-zone" id="dropZone">
+                Перетащи теги сюда!
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Получаем элементы
+        const tags = document.querySelectorAll('.tag');
+        const dropZone = document.getElementById('dropZone');
+        
+        // Добавляем обработчики для перетаскивания
+        tags.forEach(tag => {
+            tag.addEventListener('dragstart', function(e) {
+                e.dataTransfer.setData('text/html', this.getAttribute('data-tag'));
+                this.style.opacity = '0.4';
+            });
+            
+            tag.addEventListener('dragend', function() {
+                this.style.opacity = '1';
+            });
+        });
+        
+        // Обработчики для зоны сброса
+        dropZone.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            this.style.background = 'rgba(102, 126, 234, 0.2)';
+        });
+        
+        dropZone.addEventListener('dragleave', function() {
+            this.style.background = 'rgba(102, 126, 234, 0.1)';
+        });
+        
+        dropZone.addEventListener('drop', function(e) {
+            e.preventDefault();
+            this.style.background = 'rgba(102, 126, 234, 0.1)';
+            
+            const html = e.dataTransfer.getData('text/html');
+            const element = document.createElement('div');
+            element.innerHTML = html;
+            element.style.margin = '10px 0';
+            element.style.padding = '10px';
+            element.style.border = '1px solid #e2e8f0';
+            element.style.borderRadius = '5px';
+            
+            this.appendChild(element);
+            
+            // Проверяем выполнение задания
+            checkTaskCompletion();
+        });
+        
+        function checkTaskCompletion() {
+            const elements = dropZone.querySelectorAll('*');
+            const hasH1 = Array.from(elements).some(el => el.tagName === 'H1');
+            const hasP = Array.from(elements).filter(el => el.tagName === 'P').length >= 2;
+            
+            if (hasH1 && hasP) {
+                alert('🎉 Ура! Задание выполнено! Ты освоил базовые HTML-теги!');
+                // Здесь позже добавим систему достижений
+            }
+        }
+    </script>
+</body>
+</html>
