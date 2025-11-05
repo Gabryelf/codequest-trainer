@@ -150,10 +150,12 @@
             const elements = dropZone.querySelectorAll('*');
             const hasH1 = Array.from(elements).some(el => el.tagName === 'H1');
             const hasP = Array.from(elements).filter(el => el.tagName === 'P').length >= 2;
-            
+
             if (hasH1 && hasP) {
+                unlockAchievement('htmlMaster');
+                unlockAchievement('firstProject');
                 alert('🎉 Ура! Задание выполнено! Ты освоил базовые HTML-теги!');
-                // Здесь позже добавим систему достижений
+
             }
         }
     </script>
