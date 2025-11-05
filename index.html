@@ -41,7 +41,7 @@
         <h1>🎮 CodeQuest</h1>
         <p>Игровой тренажёр для изучения HTML, CSS и JavaScript!</p>
         
-        <div class="level-card" onclick="startLevel('html')">
+        <div class="level-card" onclick="window.location.href='html-island.html'">
             <h3>🏝️ HTML-Остров</h3>
             <p>Изучи основы HTML, строя структуру страницы</p>
         </div>
@@ -59,8 +59,12 @@
 
     <script>
         function startLevel(level) {
-            alert('Уровень "' + level + '" скоро будет доступен! Следи за обновлениями!');
-        }
+            if (level === 'html') {
+                window.location.href = 'html-island.html';
+           } else {
+               alert('Уровень "' + level + '" скоро будет доступен! Следи за обновлениями!');
+    }
+}
     </script>
 </body>
 </html>
